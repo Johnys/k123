@@ -1,0 +1,12 @@
+.vscode
+
+backend/node_modules
+backend/app/public/doc
+backend/coverage
+backend/.nyc_output
+backend/.npm
+backend/.eslintcache
+backend/logs
+backend/build
+backend/.env
+backend/lib-cov
