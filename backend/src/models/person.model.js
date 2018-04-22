@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
 import uuid from 'uuid';
 import moment from 'moment';
+import randon from 'mongoose-simple-random';
+import { search } from './base.model';
 
 const validateEmail = (email) => {
   const emailRegex = /^[-a-z0-9%S_+]+(\.[-a-z0-9%S_+]+)*@(?:[a-z0-9-]{1,63}\.){1,125}[a-z]{2,63}$/i;
@@ -41,6 +43,8 @@ PersonSchema.set('toJSON', {
   },
 });
 
+PersonSchema.plugin(randon);
+
 PersonSchema.path('email')
   .validate(function validate(email) {
     return new Promise((resolve, reject) => {
@@ -53,14 +57,7 @@ PersonSchema.path('email')
     });
   }, 'Email já em uso');
 
-PersonSchema.statics.search = function search(params = {}, limit = 10, offset = 0) {
-  if (params.id) {
-    return this.findOne({ uuid: params.id });
-  }
-  return this.find(params)
-    .limit(limit)
-    .skip(offset);
-};
+PersonSchema.statics.search = search;
 
 
 const PersonModel = mongoose.models.Person || mongoose.model('Person', PersonSchema);

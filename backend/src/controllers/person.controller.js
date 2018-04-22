@@ -13,12 +13,12 @@ class PersonController extends BaseController {
 
   update(req, res) {
     const params = req.body;
-    const promise = PersonModel.findOneAndUpdate({ uuid: params.id }, this.personParams(params), { new: true });
+    const promise = PersonModel.findOneAndUpdate({ uuid: req.params.id }, this.personParams(params), { new: true });
     super.bindResultModel(promise, res);
   }
 
   delete(req, res) {
-    PersonModel.remove({ uuid: req.body.id }, (err) => {
+    PersonModel.remove({ uuid: req.params.id }, (err) => {
       res.sendStatus(err ? 500 : 200);
     });
   }
@@ -26,7 +26,6 @@ class PersonController extends BaseController {
   personParams(params) {
     return super.filterParams(params, ['name', 'email']);
   }
-
 }
 
 export default PersonController;

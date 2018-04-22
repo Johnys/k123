@@ -5,7 +5,6 @@ import sinonStubsPromise from 'sinon-stub-promise';
 import { mockReq, mockRes } from 'sinon-express-mock';
 import DatabaseMock from '../utils/database.mock';
 import PersonController from '../../src/controllers/person.controller';
-import Constants from '../../src/config/constants';
 import PersonModel from '../../src/models/person.model';
 import Utils from '../utils/utils';
 
@@ -113,7 +112,7 @@ describe('PersonController', () => {
         Utils.bindCatch(new PersonModel({name: "teste4", email: "teste4@gmail.com"}).save(), done)
           .then((person) => {
             person = person.toJSON();
-            req = new mockReq({ body: {id: person.id,  name: 'teste5', email: "teste5@gmail.com"}});
+            req = new mockReq({params: {id: person.id}, body: {name: 'teste5', email: "teste5@gmail.com"}});
             new PersonController().update(req, res);
             res.json.callsFake((personUpdate) => {
               expect(personUpdate).to.include({name: 'teste5', email: "teste5@gmail.com"});
@@ -128,7 +127,7 @@ describe('PersonController', () => {
         Utils.bindCatch(new PersonModel({name: "teste6", email: "teste6@gmail.com"}).save(), done)
           .then((person) => {
             person = person.toJSON();
-            req = new mockReq({ body: {id: person.id}});
+            req = new mockReq({ params: {id: person.id}});
             new PersonController().delete(req, res);
             res.sendStatus.callsFake((status) => {
               expect(status).to.be.eqls(200);
