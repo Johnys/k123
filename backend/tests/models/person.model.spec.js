@@ -1,8 +1,13 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinonChai from "sinon-chai";
+import sinon from "sinon";
+import sinonStubsPromise from "sinon-stub-promise";
 import DatabaseMock from '../utils/database.mock';
 import PersonModel from '../../src/models/person.model';
-import Constants from '../../src/config/constants';
 import Utils from '../utils/utils';
+
+chai.use(sinonChai);
+sinonStubsPromise(sinon);
 
 describe('PersonModel', () => {
   describe('Smoke tests', () => {
@@ -22,6 +27,24 @@ describe('PersonModel', () => {
 
     after((done) => {
       DatabaseMock.end(done);
+    });
+
+    describe('save method', () => {
+
+      it('should execute save method with fails when search method is execute', (done) => {
+        const stub = sinon.stub(PersonModel, 'search');
+        stub.rejects(new Error('Fake Error'));
+        new PersonModel({name: 'teste', email: 'teste1@gmail.com'}).save()
+          .then(result => {
+            expect(result).to.be.null;
+            stub.restore();
+            done();
+          }).catch(err => {
+            expect(err).not.to.be.null;
+            stub.restore();
+            done();
+          });
+      });
     });
 
     describe('search method', () => {

@@ -36,7 +36,7 @@ const defaultConfig = {
     from: 'jjohnys@gmail.com',
     user: 'jjohnys@gmail.com',
     password: 'jjrwvftwlvbgihhk',
-  }
+  },
 };
 
 // Environment specific overrides

@@ -8,8 +8,8 @@ const EMAIL_TYPES = {
     name: 'secret_friend',
     file: '/templates/secret_friend.html',
     subject: 'Sorteio de amigo secreto',
-    accept_params: ['name', 'friend'],
-  }
+    accept_params: ['name', 'friend', 'friend_email', 'secret_friend_name'],
+  },
 };
 
 class MailClient {

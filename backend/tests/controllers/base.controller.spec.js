@@ -39,6 +39,19 @@ describe('BaseController', () => {
 
     });
 
+    it('should call bindResultModel with promisse success and then params', (done) => {
+      const res = new mockRes();
+      let resolve = null;
+      res.json.callsFake((model) => {
+        expect(model).to.include({a: 1});
+        done();
+      });
+      new BaseController().bindResultModel(new Promise((resolve, reject) => {
+        resolve({toJSON: () => {return {a: 1}}});
+      }), res, (result) => result);
+
+    });
+
     it('should call bindResultModel with promisse error', (done) => {
       const res = new mockRes();
       let reject = null;

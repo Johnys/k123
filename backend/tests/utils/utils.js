@@ -6,8 +6,9 @@ class Utils{
   }
 
   static bind(promise, done, success){
-    return Utils.bindCatch(promise, done)
-      .then(success).then(() => done());
+    promise = Utils.bindCatch(promise, done)
+    if (success) promise.then(success);
+    promise.then(() => done());
   }
 
   static promiseWithError(){
