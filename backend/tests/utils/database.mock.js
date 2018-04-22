@@ -9,7 +9,9 @@ class DatabaseMock {
     mockgoose.prepareStorage().then(() => {
       mongoose.connect(Constants.mongo.uri, (err) => {
         DatabaseMock.mockgoose = mockgoose;
-        callback();
+        mockgoose.helper.reset().then(() => {
+          callback();
+        });
       });
     }).catch((err) => {
       callback(err);

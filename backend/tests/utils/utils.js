@@ -5,6 +5,11 @@ class Utils{
     });
   }
 
+  static bind(promise, done, success){
+    return Utils.bindCatch(promise, done)
+      .then(success).then(() => done());
+  }
+
   static promiseWithError(){
     return new Promise((resolve, reject) => {
       reject(new Error('Fake error'));
