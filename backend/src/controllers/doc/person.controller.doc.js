@@ -69,7 +69,7 @@
   * @apiParam  {String} [name] Nome da pessoa
   * @apiParam  {String} [email] Email da pessoa
   *
-  * @apiSuccess (200) {String} [name]  Nome do pessoa
+  * @apiSuccess (200) {String} name  Nome do pessoa
   * @apiSuccess (200) {String} email  E-mail.
   * @apiSuccess (200) {Date} createdAt  Data de criação do pessoa
   * @apiSuccess (200) {Date} updatedAt  Última data de atualização da pessoa
