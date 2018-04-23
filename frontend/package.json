@@ -1,0 +1,65 @@
+{
+  "name": "amigo-secreto",
+  "version": "1.0.0",
+  "description": "Front-end do amigo secreto",
+  "scripts": {
+    "build": "rimraf dist && webpack --bail --progress --profile",
+    "server": "webpack-dev-server --history-api-fallback --inline --progress",
+    "test": "mocha ./tests -name '*.spec.js' --recursive --timeout 120000 --require babel-register --exit ",
+    "start": "npm run server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Johnys/k123.git"
+  },
+  "keywords": [
+    "angular",
+    "material",
+    "material-desing",
+    "es6",
+    "javascript"
+  ],
+  "author": "Johnys Rabelo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Johnys/k123/issues"
+  },
+  "homepage": "https://github.com/Johnys/k123#readme",
+  "dependencies": {
+    "angular": "^1.6.10"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.10",
+    "autoprefixer": "^8.3.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "ignore-styles": "^5.0.1",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "jsdom": "^11.9.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "mocha": "^5.1.1",
+    "mocha-webpack": "^1.1.0",
+    "node-libs-browser": "^2.1.0",
+    "null-loader": "^0.1.1",
+    "postcss-loader": "^2.1.4",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
