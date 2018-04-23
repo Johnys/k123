@@ -7,24 +7,21 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 const ENV = process.env.npm_lifecycle_event;
-const isTest = ENV === 'test' || ENV === 'test-watch';
 const isProd = ENV === 'build';
 
 module.exports = (function makeWebpackConfig() {
   const config = {};
-  config.entry = isTest ? undefined : {
+  config.entry = {
     app: './src/app/app.js',
   };
   config.mode = isProd ? 'production' : 'development';
-  config.output = isTest ? {} : {
+  config.output = {
     path: path.join(__dirname, 'dist'),
     publicPath: isProd ? '/' : 'http://localhost:8080/',
     filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
     chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js',
   };
-  if (isTest) {
-    config.devtool = 'inline-source-map';
-  } else if (isProd) {
+  if (isProd) {
     config.devtool = 'source-map';
   } else {
     config.devtool = 'eval-source-map';
@@ -36,7 +33,10 @@ module.exports = (function makeWebpackConfig() {
       exclude: /node_modules/,
     }, {
       test: /\.css$/,
-      use: isTest ? 'null-loader' : [MiniCssExtractPlugin.loader, 'css-loader'],
+      use: [MiniCssExtractPlugin.loader, 'css-loader'],
+    }, {
+      test: /\.scss$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
     }, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       use: 'file-loader',
@@ -45,38 +45,14 @@ module.exports = (function makeWebpackConfig() {
       use: 'raw-loader',
     }],
   };
-  if (isTest) {
-    config.module.rules.push({
-      test: /\.js$/,
-      use: {
-        loader: 'istanbul-instrumenter-loader',
-        options: {
-          esModules: true,
-        },
-      },
-      enforce: 'post',
-      exclude: /node_modules|\.spec\.js$/,
-    });
-  }
-  config.plugins = [
-    new webpack.LoaderOptionsPlugin({
-      test: /\.scss$/i,
-      options: {
-        postcss: {
-          plugins: [autoprefixer],
-        },
-      },
+  config.plugins = [];
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      template: './src/public/index.html',
+      inject: 'body',
     }),
-  ];
-  if (!isTest) {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: './src/public/index.html',
-        inject: 'body',
-      }),
-      new MiniCssExtractPlugin({ filename: 'css/[name].css', chunkFilename: '[id].css' }),
-    );
-  }
+    new MiniCssExtractPlugin({ filename: 'css/[name].css', chunkFilename: '[id].css' }),
+  );
   if (isProd) {
     config.plugins.push(
       new webpack.NoEmitOnErrorsPlugin(),
