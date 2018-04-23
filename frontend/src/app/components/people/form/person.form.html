@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">Cadastro de Pessoa</div>
+  <form class="card-body" id="formperson" name="formperson">
+    <div class="row">
+      <div class="col-6 form-group">
+        <label for="name">Nome</label>
+        <input type="text" name="name" ng-model="person.name" class="form-control" required>
+      </div>
+      <div class="col-6 form-group">
+          <label for="email">E-mail</label>
+          <input type="email" name="email" ng-model="person.email" class="form-control" required>
+          <span class="invalid-feedback" ng-show="formperson.email.$error.api">{{formperson.email.errorMessage}}</span>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary" ng-click="save(formperson)">Salvar</button>
+        <a class="btn btn-warning" ng-click="cancel()">Cancelar</a>
+      </div>
+    </div>
+  </form>
+</div>

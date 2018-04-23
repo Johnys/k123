@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-header">
+    Pessoas
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="offset-8 col-4 align-self-end form-group">
+          <input type="search" placeholder="Pesquisar" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+    <table class="col-12 table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr ng-if="people.length === 0">
+            <td colspan="3">Nenhum resultado encontrado</td>
+          </tr>
+          <tr ng-repeat="person in people">
+              <td>{{person.name}}</td>
+              <td>{{person.email}}</td>
+              <td>
+                <button class="btn btn-primary">Editar</button>
+                <button class="btn btn-danger">Excluir</button>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+    <button class="btn btn-primary" ng-click="new()">Cadastrar Nova Pessoa</button>
+  </div>
+</div>

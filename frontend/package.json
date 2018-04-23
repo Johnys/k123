@@ -6,7 +6,17 @@
     "build": "rimraf dist && webpack --bail --progress --profile",
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "mocha ./tests -name '*.spec.js' --recursive --timeout 120000 --require babel-register --exit ",
-    "start": "npm run server"
+    "start": "npm run server",
+    "coverage": "nyc npm test"
+  },
+  "nyc": {
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
   },
   "repository": {
     "type": "git",
@@ -26,7 +36,16 @@
   },
   "homepage": "https://github.com/Johnys/k123#readme",
   "dependencies": {
-    "angular": "^1.6.10"
+    "@uirouter/angularjs": "^1.0.15",
+    "angular": "^1.6.10",
+    "angular-animate": "^1.6.10",
+    "angular-messages": "^1.6.10",
+    "angular-route": "^1.6.10",
+    "angular-sanitize": "^1.6.10",
+    "bootstrap": "^4.1.0",
+    "jquery": "^3.3.1",
+    "ng-toast": "^2.0.0",
+    "popper.js": "^1.14.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.10",
@@ -52,10 +71,13 @@
     "mocha": "^5.1.1",
     "mocha-webpack": "^1.1.0",
     "node-libs-browser": "^2.1.0",
+    "node-sass": "^4.8.3",
     "null-loader": "^0.1.1",
+    "nyc": "^11.7.1",
     "postcss-loader": "^2.1.4",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.2",
+    "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",
