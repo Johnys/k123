@@ -10,3 +10,14 @@ backend/logs
 backend/build
 backend/.env
 backend/lib-cov
+
+frontend/node_modules
+frontend/app/public/doc
+frontend/coverage
+frontend/.nyc_output
+frontend/.npm
+frontend/.eslintcache
+frontend/logs
+frontend/build
+frontend/.env
+frontend/lib-cov
