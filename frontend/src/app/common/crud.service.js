@@ -11,7 +11,7 @@ class CrudService extends BaseService {
     return new Promise((resolve, reject) => this.threatPromisse(this.http.delete(this.getURI(data.id)), resolve, reject));
   }
   find(data) {
-    return new Promise((resolve, reject) => this.threatPromisse(this.http.get(this.getURI(), data), resolve, reject));
+    return new Promise((resolve, reject) => this.threatPromisse(this.http.get(this.getURI(), { params: data }), resolve, reject));
   }
 }
 

@@ -8,5 +8,6 @@ angular.module('MyApp', [
   router,
   ngSantanize,
   'ngToast',
+  'ui.bootstrap',
   Components.name,
-]).run($rootScope => ($rootScope.progress = false)).directive('app', app);
+]).directive('app', app);
