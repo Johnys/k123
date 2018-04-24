@@ -52,7 +52,7 @@ describe('SecretFriendController', () => {
       it('should call with no params', (done) => {
         new SecretFriendController().index(req, res);
         res.json.callsFake((result) => {
-          expect(result).to.be.instanceOf(Array);
+          expect(result.docs).to.be.instanceOf(Array);
           done();
         });
       });

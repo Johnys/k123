@@ -6,7 +6,7 @@ import PersonModel from '../models/person.model';
 
 class SecretFriendController extends BaseController {
   index(req, res) {
-    super.bindResultModel(SecretFriendModel.search(req.params), res);
+    super.bindResultModel(SecretFriendModel.search(this.makeRegexFilter(req.query, ['name'])), res);
   }
 
   async create(req, res) {

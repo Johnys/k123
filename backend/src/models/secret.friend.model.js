@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import 'babel-polyfill';
 import uuid from 'uuid';
 import moment from 'moment';
+import mongoosePaginate from 'mongoose-paginate';
 import PersonModel from './person.model';
 import { search } from './base.model';
 
@@ -48,9 +49,8 @@ SecretFriendSchema.set('toJSON', {
   },
 });
 
-SecretFriendSchema.statics.search = function searchSecretFriend(params = {}, limit = 10, offset = 0) {
-  const query = search.bind(this)(params, limit, offset);
-  return query.sort('-createdAt');
+SecretFriendSchema.statics.search = function searchSecretFriend(params = {}) {
+  return search.bind(this)(params, 'name');
 };
 
 /* eslint-disable camelcase */
@@ -72,6 +72,8 @@ SecretFriendSchema.statics.generate = function generate(name, revelation_date, p
     });
   });
 };
+
+SecretFriendSchema.plugin(mongoosePaginate);
 
 
 const SecretFriendModel = mongoose.models.SecretFriend || mongoose.model('SecretFriend', SecretFriendSchema);

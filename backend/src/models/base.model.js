@@ -1,10 +1,14 @@
-const search = function search(params = {}, limit = 10, offset = 0) {
+const search = function search(params = {}, sort) {
   if (params.id) {
     return this.findOne({ uuid: params.id });
   }
-  return this.find(params)
-    .limit(limit)
-    .skip(offset);
+  let limit = params.limit || 10;
+  let offset = params.offset || 1;
+  limit = parseInt(limit, 10);
+  offset = parseInt(offset, 10);
+  delete params.limit;
+  delete params.offset;
+  return this.paginate(params, { limit, page: offset, sort });
 };
 
 /* eslint-disable */
