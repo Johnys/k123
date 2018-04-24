@@ -1,7 +1,7 @@
 .vscode
 
 backend/node_modules
-backend/app/public/doc
+backend/src/public/doc
 backend/coverage
 backend/.nyc_output
 backend/.npm

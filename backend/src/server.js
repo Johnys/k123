@@ -15,7 +15,9 @@ app.use(helmet());
 
 // Enable CORS with various options
 // https://github.com/expressjs/cors
-app.use(cors());
+app.use(cors({
+  origin: Constants.cors.origin,
+}));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,7 +25,6 @@ app.use(methodOverride());
 app.use('/public', express.static(`${__dirname}/public`));
 app.use(Constants.apiPrefix, routes);
 if (!Constants.envs.test) {
-  console.log('Subiu servidor de email');
   MailServer.init();
   app.use(yes());
 }

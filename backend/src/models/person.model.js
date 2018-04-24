@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import uuid from 'uuid';
 import moment from 'moment';
 import randon from 'mongoose-simple-random';
+import mongoosePaginate from 'mongoose-paginate';
 import { search } from './base.model';
 
 const validateEmail = (email) => {
@@ -50,17 +51,18 @@ PersonSchema.path('email')
     return new Promise((resolve, reject) => {
       PersonModel.search({ email })
         .then((person) => {
-          (person.length === 0 || person[0].uuid === this.uuid) ? resolve() : reject();
+          (person.docs.length === 0 || person.docs[0].uuid === this.uuid) ? resolve() : reject();
         }).catch((err) => {
           reject(err);
         });
     });
   }, 'Email já em uso');
 
-PersonSchema.statics.search = function searchPerson(params = {}, limit = 10, offset = 0) {
-  const query = search.bind(this)(params, limit, offset);
-  return query.sort('name');
+PersonSchema.statics.search = function searchPerson(params = {}) {
+  return search.bind(this)(params, 'name');
 };
+
+PersonSchema.plugin(mongoosePaginate);
 
 
 const PersonModel = mongoose.models.Person || mongoose.model('Person', PersonSchema);

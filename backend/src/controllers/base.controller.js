@@ -32,7 +32,11 @@ class BaseController {
   }
 
   processResponseModel(res, models, resultEmpty = []) {
-    if (models instanceof Array) {
+    if (models.docs) {
+      const docs = models.docs.map(doc => doc.toJSON());
+      models.docs = docs;
+      res.json(models);
+    } else if (models instanceof Array) {
       res.json(models.map(model => model.toJSON()));
     } else {
       res.json(models ? (models.toJSON() || resultEmpty) : resultEmpty);
@@ -44,10 +48,25 @@ class BaseController {
       promise.then(then);
     }
     promise.then((result) => {
-      this.processResponseModel(res, result);
+      this.processResponseModel(res, result, []);
     }).catch((err) => {
       res.json(this.formatApiError(err));
     });
+  }
+
+  makeRegexFilter(query, fields = []) {
+    const newQuery = { $or: [] };
+    Object.keys(query).map((key) => {
+      if (fields.length === 0 || fields.indexOf(key) >= 0) {
+        newQuery.$or.push({ [key]: new RegExp(`.*${query[key]}.*`, 'i') });
+      } else {
+        newQuery[key] = query[key];
+      }
+    });
+    if (newQuery.$or.length === 0) {
+      delete newQuery.$or;
+    }
+    return newQuery;
   }
 }
 

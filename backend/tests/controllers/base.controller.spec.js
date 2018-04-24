@@ -26,7 +26,7 @@ describe('BaseController', () => {
       expect(new BaseController().formatApiError({errors: {not_null: {message: "O nome não pode ser em branco.", no_returned_key: false}}})).to.deep.equal({error: true, errors: {not_null: {message: "O nome não pode ser em branco.", type: undefined}}});
     });
 
-    it('should call bindResultModel with promisse success', (done) => {
+    it('should call bindResultModel with promisse success with param object', (done) => {
       const res = new mockRes();
       let resolve = null;
       res.json.callsFake((model) => {
@@ -35,6 +35,20 @@ describe('BaseController', () => {
       });
       new BaseController().bindResultModel(new Promise((resolve, reject) => {
         resolve({toJSON: () => {return {a: 1}}});
+      }), res);
+
+    });
+
+    it('should call bindResultModel with promisse success with param array', (done) => {
+      const res = new mockRes();
+      let resolve = null;
+      res.json.callsFake((model) => {
+        expect(model).to.be.instanceof(Array);
+        expect(model[0]).to.include({a: 1});
+        done();
+      });
+      new BaseController().bindResultModel(new Promise((resolve, reject) => {
+        resolve([{toJSON: () => {return {a: 1}}}]);
       }), res);
 
     });

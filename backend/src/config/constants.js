@@ -15,6 +15,9 @@ const defaultConfig = {
   router: {
     secure_path: /^[/]secure.*/,
   },
+  cors: {
+    origin: 'http://localhost:8080',
+  },
   version: pkg.version,
   root: path.normalize(`${__dirname}/../../..`),
   port: process.env.PORT || 4567,
@@ -54,6 +57,10 @@ const environmentConfigs = {
   production: {
     mongo: {
       uri: process.env.MONGO_URI || 'mongodb://userproduction:asdfa7129873asdf2313@ds247759.mlab.com:47759/secret-friend',
+    },
+    port: 8080,
+    cors: {
+      origin: 'https://amigo-secreto-site.appspot.com',
     },
   },
 };

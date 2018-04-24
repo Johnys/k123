@@ -59,23 +59,41 @@ describe('PersonController', () => {
       it('should call with no params', (done) => {
         new PersonController().index(req, res);
         res.json.callsFake((result) => {
-          expect(result).to.be.instanceOf(Array);
+          expect(result.docs).to.be.instanceOf(Array);
           done();
         });
       });
 
       it('should call with id param', (done) => {
         const personModel = new PersonModel({
-          name: 'teste3',
-          email: 'teste3@gmail.com'
+          name: 'teste9',
+          email: 'teste9@gmail.com'
         });
         Utils.bindCatch(personModel.save(), done)
           .then((person) => {
             person = person.toJSON();
-            req = new mockReq({params: {id: person.id}});
+            req = new mockReq({query: {id: person.id}});
             new PersonController().index(req, res);
             res.json.callsFake((result) => {
-              expect(result).to.include({ name: 'teste3', email: 'teste3@gmail.com' });
+              expect(result).to.include({ name: 'teste9', email: 'teste9@gmail.com' });
+              done();
+            });
+          });
+      });
+
+      it('should call with name param', (done) => {
+        const personModel = new PersonModel({
+          name: 'teste7',
+          email: 'teste7@gmail.com'
+        });
+        Utils.bindCatch(personModel.save(), done)
+          .then((person) => {
+            person = person.toJSON();
+            req = new mockReq({query: {name: 'teste7'}});
+            new PersonController().index(req, res);
+            res.json.callsFake((result) => {
+              expect(result.docs).to.be.instanceOf(Array);
+              expect(result.docs[0]).to.include({ name: 'teste7', email: 'teste7@gmail.com' });
               done();
             });
           });

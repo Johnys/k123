@@ -3,7 +3,7 @@ import PersonModel from '../models/person.model';
 
 class PersonController extends BaseController {
   index(req, res) {
-    super.bindResultModel(PersonModel.search(req.params), res);
+    super.bindResultModel(PersonModel.search(this.makeRegexFilter(req.query, ['name', 'email'])), res);
   }
 
   create(req, res) {
