@@ -19,5 +19,6 @@ frontend/.npm
 frontend/.eslintcache
 frontend/logs
 frontend/build
+frontend/dist
 frontend/.env
 frontend/lib-cov

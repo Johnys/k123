@@ -57,7 +57,10 @@ PersonSchema.path('email')
     });
   }, 'Email já em uso');
 
-PersonSchema.statics.search = search;
+PersonSchema.statics.search = function searchPerson(params = {}, limit = 10, offset = 0) {
+  const query = search.bind(this)(params, limit, offset);
+  return query.sort('name');
+};
 
 
 const PersonModel = mongoose.models.Person || mongoose.model('Person', PersonSchema);

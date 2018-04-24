@@ -23,6 +23,7 @@ app.use(methodOverride());
 app.use('/public', express.static(`${__dirname}/public`));
 app.use(Constants.apiPrefix, routes);
 if (!Constants.envs.test) {
+  console.log('Subiu servidor de email');
   MailServer.init();
   app.use(yes());
 }

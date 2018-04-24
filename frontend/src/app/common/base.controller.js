@@ -51,8 +51,10 @@ class BaseController {
   }
   clearApiErros(form) {
     form.$$controls.map((control) => {
-      form[control.$name].$setValidity('api', true);
-      form[control.$name].$$attr.$removeClass('is-invalid');
+      if (form[control.$name]) {
+        form[control.$name].$setValidity('api', true);
+        form[control.$name].$$attr.$removeClass('is-invalid');
+      }
     });
   }
 }
