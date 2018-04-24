@@ -10,6 +10,8 @@ const PersonFriendSchema = new Schema({
   friend: mongoose.Schema.Types.ObjectId,
 });
 
+const validRevelationDate = (value => value.getTime() > new Date().getTime());
+
 const SecretFriendSchema = new Schema({
   name: {
     type: String,
@@ -18,6 +20,7 @@ const SecretFriendSchema = new Schema({
   revelation_date: {
     type: Date,
     required: true,
+    validate: [validRevelationDate, 'A data deve ser maior que hoje'],
   },
   uuid: {
     type: String,
@@ -45,7 +48,10 @@ SecretFriendSchema.set('toJSON', {
   },
 });
 
-SecretFriendSchema.statics.search = search;
+SecretFriendSchema.statics.search = function searchSecretFriend(params = {}, limit = 10, offset = 0) {
+  const query = search.bind(this)(params, limit, offset);
+  return query.sort('-createdAt');
+};
 
 /* eslint-disable camelcase */
 SecretFriendSchema.statics.generate = function generate(name, revelation_date, people = []) {

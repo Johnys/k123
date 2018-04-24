@@ -1,5 +1,5 @@
 import register from 'ignore-styles'
-register(['.css', '.html']);
+register(['.css', '.html', '.scss']);
 const { JSDOM } = require("jsdom");
 const dom = new JSDOM('<html><head><script></script></head><body></body></html>');
 global.window = dom.window;

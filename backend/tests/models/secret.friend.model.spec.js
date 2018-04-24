@@ -2,6 +2,7 @@ import chai, { expect } from 'chai';
 import sinonChai from "sinon-chai";
 import sinon from "sinon";
 import sinonStubsPromise from "sinon-stub-promise";
+import moment from 'moment';
 import DatabaseMock from '../utils/database.mock';
 import PersonModel from '../../src/models/person.model';
 import SecretFriendModel from '../../src/models/secret.friend.model';
@@ -38,7 +39,7 @@ describe('SecretFriendModel', () => {
       });
 
      it('should call generate without any person on the database', (done) => {
-       SecretFriendModel.generate('Teste', new Date())
+       SecretFriendModel.generate('Teste', moment().add(1, 'days').toDate())
         .then(result => {
           expect(result).to.be.null;
           done();
@@ -53,7 +54,7 @@ describe('SecretFriendModel', () => {
       stub.callsFake((conditions, fields, options, callback) => {
         callback(new Error('Fake Error'));
       });
-      SecretFriendModel.generate('Teste', new Date())
+      SecretFriendModel.generate('Teste',  moment().add(1, 'days').toDate())
       .then(result => {
         expect(result).to.be.null;
         stub.restore();
@@ -71,7 +72,7 @@ describe('SecretFriendModel', () => {
           , new PersonModel({name: 'teste2', email: 'teste2@gmail.com'}).save()
         ]), done)
         .then(() => {
-          SecretFriendModel.generate('Teste', new Date())
+          SecretFriendModel.generate('Teste',  moment().add(1, 'days').toDate())
           .then(result => {
             expect(result).to.be.exist;
             expect(result.name).to.be.eql('Teste');

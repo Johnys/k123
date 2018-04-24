@@ -32,6 +32,7 @@ class SecretFriendController extends BaseController {
       .then((drawn) => {
         drawn.forEach(member => MailClient.send(member.person.email, EMAIL_TYPES.secret_friend.name, {
           secret_friend_name: secretFriend.name,
+          revelation_date: secretFriend.toJSON().revelation_date,
           name: member.person.name,
           friend: member.friend.name,
           friend_email: member.friend.email,
