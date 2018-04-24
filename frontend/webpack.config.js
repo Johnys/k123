@@ -1,13 +1,12 @@
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
-const ENV = process.env.npm_lifecycle_event;
-const isProd = ENV === 'build';
+const ENV = process.env.NODE_ENV;
+const isProd = ENV === 'production';
 
 module.exports = (function makeWebpackConfig() {
   const config = {};
@@ -17,7 +16,7 @@ module.exports = (function makeWebpackConfig() {
   config.mode = isProd ? 'production' : 'development';
   config.output = {
     path: path.join(__dirname, 'dist'),
-    publicPath: isProd ? '/' : 'http://localhost:8080/',
+    publicPath: '/',
     filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
     chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js',
   };
@@ -67,7 +66,7 @@ module.exports = (function makeWebpackConfig() {
         uglifyOptions: {
           compress: false,
           ecma: 6,
-          mangle: true,
+          mangle: false,
         },
         sourceMap: true,
       })],
