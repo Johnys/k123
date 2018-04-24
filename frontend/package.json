@@ -6,9 +6,9 @@
     "build": "rimraf dist && webpack --bail --progress --profile && npm run coverage-build",
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "mocha ./tests -name '*.spec.js' --recursive --timeout 120000 --require babel-register --exit ",
-    "start": "build",
-    "coverage": "nyc npm test",
-    "coverage-build": "nyc npm test"
+    "start": "npm run build && node server.js",
+    "coverage": "nyc --report-dir dist/coverage npm test",
+    "coverage-build": "nyc --report-dir dist/coverage npm test"
   },
   "nyc": {
     "reporter": [
@@ -44,14 +44,12 @@
     "angular-route": "^1.6.10",
     "angular-sanitize": "^1.6.10",
     "bootstrap": "^4.1.0",
+    "express": "^4.16.3",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
     "ng-toast": "^2.0.0",
-    "popper.js": "^1.14.3"
-  },
-  "devDependencies": {
-    "angular-mocks": "^1.6.10",
-    "autoprefixer": "^8.3.0",
+    "popper.js": "^1.14.3",
+    "webpack": "^4.6.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
@@ -59,10 +57,8 @@
     "chai": "^4.1.2",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.11.0",
+    "angular-mocks": "^1.6.10",
+    "autoprefixer": "^8.3.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
@@ -82,8 +78,13 @@
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15",
+    "webpack-cli": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "webpack-dev-server": "^3.1.3"
   }
 }

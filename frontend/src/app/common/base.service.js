@@ -1,3 +1,5 @@
+import config from '../config';
+
 class BaseService {
   constructor($http, uri) {
     this.http = $http;
@@ -19,7 +21,7 @@ class BaseService {
 
   getURI(param = null) {
     param = param ? `/${param}` : '';
-    return `http://localhost:4567${this.uri}${param}`;
+    return `${config.api}${this.uri}${param}`;
   }
 }
 
