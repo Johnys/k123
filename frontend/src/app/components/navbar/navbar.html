@@ -2,6 +2,6 @@
   <a class="navbar-brand" href="#">Amigo secreto</a>
 </nav>
 <nav class="nav flex-column nav-pills">
-  <a class="nav-link active" ng-click="goto('peoplelist')">Pessoas</a>
-  <a class="nav-link" href="#/">Amigo Secreto</a>
+  <a class="nav-link {{vm.active(['peoplelist', 'personform'])}}" href ng-click="vm.goto('peoplelist')">Pessoas</a>
+  <a class="nav-link {{vm.active(['secretfriendlist'])}}" href ng-click="vm.goto('secretfriendlist')">Amigo Secreto</a>
 </nav>

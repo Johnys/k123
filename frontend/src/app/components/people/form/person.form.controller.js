@@ -1,29 +1,21 @@
-import BaseController from '../../../common/base.controller';
+import CrudController from '../../../common/crud.controller';
 
-class PersonFormController extends BaseController {
-  constructor($scope, $state, ngToast, peopleService) {
-    super(ngToast, $scope);
+class PersonFormController extends CrudController {
+  constructor($scope, $state, ngToast, peopleService, $rootScope) {
+    super(ngToast, $scope, $rootScope);
     this.scope = $scope;
     this.toast = ngToast;
     this.state = $state;
     this.service = peopleService;
-    this.scope.person = { name: 'teste', email: 'teste@gmail.com' };
-    this.scope.save = this.save.bind(this);
-    this.scope.cancel = this.cancel.bind(this);
+    this.scope.person = { name: $state.params.name, email: $state.params.email, id: $state.params.id };
   }
 
   save(form) {
-    this.clearApiErros(form);
-    if (form.$valid) {
-      let promise = this.service.save(this.scope.person);
-      promise = this.processPromise(promise, 'Pessoa cadastrada com sucesso!', form);
-      promise.then((result) => {
-        if (result && !result.error) {
-          this.cancel();
-        }
-        return result;
-      });
-    }
+    this.persist(form, this.service.save(this.scope.person), 'Pessoa cadastrada com sucesso!');
+  }
+
+  update(form) {
+    this.persist(form, this.service.update(this.scope.person), 'Pessoa alterada com sucesso!');
   }
 
   cancel() {

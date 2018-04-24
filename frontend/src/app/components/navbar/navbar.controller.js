@@ -1,8 +1,12 @@
+/* globals window */
 class NavBarController {
   constructor($scope, $state) {
     this.$scope = $scope;
     this.$state = $state;
-    $scope.goto = this.goto.bind(this);
+  }
+
+  active(pages) {
+    return pages.indexOf(window.location.hash.split('/')[1]) >= 0 ? 'active' : '';
   }
 
   goto(state) {

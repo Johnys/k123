@@ -9,4 +9,4 @@ angular.module('MyApp', [
   ngSantanize,
   'ngToast',
   Components.name,
-]).directive('app', app);
+]).run($rootScope => ($rootScope.progress = false)).directive('app', app);
