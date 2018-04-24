@@ -14,8 +14,8 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <button class="btn btn-primary" ng-click="save(formperson)">Salvar</button>
-        <a class="btn btn-warning" ng-click="cancel()">Cancelar</a>
+        <button class="btn btn-primary" ng-click="person.id ? vm.update(formperson) : vm.save(formperson)">Salvar</button>
+        <a class="btn btn-warning" ng-click="vm.cancel()">Cancelar</a>
       </div>
     </div>
   </form>

@@ -8,6 +8,11 @@ peopleModule.config(($stateProvider) => {
     .state('personform', {
       url: '/personform',
       template: '<personform></personform>',
+      params: {
+        id: null,
+        name: '',
+        email: '',
+      },
     });
 });
 peopleModule.component('personform', PersonForm);

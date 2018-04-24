@@ -25,13 +25,13 @@
               <td>{{person.name}}</td>
               <td>{{person.email}}</td>
               <td>
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-danger">Excluir</button>
+                <button class="btn btn-primary" ng-click="vm.edit(person)">Editar</button>
+                <button class="btn btn-danger" ng-click="vm.remove(person)">Excluir</button>
               </td>
           </tr>
       </tbody>
     </table>
     </div>
-    <button class="btn btn-primary" ng-click="new()">Cadastrar Nova Pessoa</button>
+    <button class="btn btn-primary" ng-click="vm.new()">Cadastrar Nova Pessoa</button>
   </div>
 </div>

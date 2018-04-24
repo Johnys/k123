@@ -17,8 +17,9 @@ class BaseService {
     }
   }
 
-  getURI() {
-    return `http://localhost:4567${this.uri}`;
+  getURI(param = null) {
+    param = param ? `/${param}` : '';
+    return `http://localhost:4567${this.uri}${param}`;
   }
 }
 

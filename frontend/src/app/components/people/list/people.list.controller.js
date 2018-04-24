@@ -1,24 +1,48 @@
-class PeopleListController {
-  constructor($scope, $state, peopleService) {
-    this.scope = $scope;
+/* globals window */
+import BaseController from '../../../common/base.controller';
+
+class PeopleListController extends BaseController {
+  constructor($scope, $state, ngToast, peopleService, $rootScope) {
+    super(ngToast, $scope, $rootScope);
     this.state = $state;
     this.service = peopleService;
-    this.scope.people = [{ id: 0, name: 'teste', email: 'teste@teste.com' }];
-    this.scope.edit = this.edit.bind(this);
-    this.scope.remove = this.remove.bind(this);
-    this.scope.new = this.new.bind(this);
+    this.scope.people = [];
+    this.find();
   }
 
   new() {
     this.state.go('personform');
   }
 
-  edit(person) {
+  find() {
+    this.progress(true);
+    let promise = this.service.find({});
+    promise = this.processPromise(promise);
+    promise.then((result) => {
+      if (!result.error) {
+        this.scope.people = result;
+        this.scope.$apply();
+      }
+      this.progress(false);
+    });
+  }
 
+  edit(person) {
+    this.state.go('personform', person);
   }
 
   remove(person) {
-
+    if (window.confirm(`Deseja excluir a pessoa: ${person.name}`)) {
+      this.progress(true);
+      let promise = this.service.remove(person);
+      promise = this.processPromise(promise, 'Pessoa excluida com sucesso!');
+      promise.then((result) => {
+        if (!result.error) {
+          this.find();
+        }
+        this.progress(false);
+      });
+    }
   }
 }
 
