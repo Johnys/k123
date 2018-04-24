@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
+const configDev = require('./src/config.dev');
+const configProduction = require('./src/config.production');
 
 const ENV = process.env.NODE_ENV;
 const isProd = ENV === 'production';
@@ -52,6 +54,9 @@ module.exports = (function makeWebpackConfig() {
     }),
     new MiniCssExtractPlugin({ filename: 'css/[name].css', chunkFilename: '[id].css' }),
   );
+  config.plugins.push(new webpack.DefinePlugin({
+    __CONFIG: isProd ? JSON.stringify(configProduction) : JSON.stringify(configDev),
+  }));
   if (isProd) {
     config.plugins.push(
       new webpack.NoEmitOnErrorsPlugin(),

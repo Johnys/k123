@@ -1,5 +1,4 @@
-import config from '../config';
-
+/* globals __CONFIG */
 class BaseService {
   constructor($http, uri) {
     this.http = $http;
@@ -20,8 +19,9 @@ class BaseService {
   }
 
   getURI(param = null) {
+    console.log(__CONFIG);
     param = param ? `/${param}` : '';
-    return `${config.api}${this.uri}${param}`;
+    return `${__CONFIG.api}${this.uri}${param}`;
   }
 }
 

@@ -6,8 +6,12 @@ class SecretFriendListController extends BaseController {
     super(ngToast, $scope, $rootScope);
     this.scope = $scope;
     this.scope.secretsFriends = [];
+    this.scope.total = 0;
+    this.scope.page = 1;
+    this.scope.limit = 10;
     this.state = $state;
     this.service = secretFriendService;
+    this.scope.$watch('search', () => this.find());
     this.find();
   }
 
@@ -15,13 +19,23 @@ class SecretFriendListController extends BaseController {
     this.state.go(states.SECRETFRIEND_FORM);
   }
 
+  getSearchQuery() {
+    const query = { limit: this.scope.limit, offset: this.scope.page };
+    if (this.scope.search && this.scope.search.length > 0) {
+      query.name = this.scope.search;
+    }
+    return query;
+  }
+
   find() {
     this.progress(true);
-    let promise = this.service.find({});
+    let promise = this.service.find(this.getSearchQuery());
     promise = this.processPromise(promise);
     promise.then((result) => {
       if (!result.error) {
-        this.scope.secretsFriends = result;
+        this.scope.secretsFriends = result.docs;
+        this.scope.total = result.total;
+        this.scope.limit = result.limit;
       }
       this.progress(false);
     });
