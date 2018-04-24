@@ -18,11 +18,11 @@ class SecretFriendFormController extends CrudController {
 
   findPeople() {
     this.progress(true);
-    let promise = this.peopleService.find({});
+    let promise = this.peopleService.find({ limit: 10000 });
     promise = this.processPromise(promise);
     promise.then((result) => {
       if (!result.error) {
-        this.scope.people = result;
+        this.scope.people = result.docs;
         this.checkAll();
       }
       this.progress(false);

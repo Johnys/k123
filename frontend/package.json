@@ -6,8 +6,8 @@
     "build": "rimraf dist && webpack --bail --progress --profile && npm run coverage-build",
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "mocha ./tests -name '*.spec.js' --recursive --timeout 120000 --require babel-register --exit ",
-    "start": "npm run build && pm2 start server.js",
-    "coverage": "nyc --report-dir dist/coverage npm test",
+    "start": "npm run build && node server.js",
+    "coverage": "nyc --report-dir coverage npm test",
     "coverage-build": "nyc --report-dir dist/coverage npm test"
   },
   "nyc": {
@@ -76,6 +76,8 @@
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",
+    "sinon": "^4.5.0",
+    "sinon-chai": "^3.0.0",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "ui-bootstrap4": "^3.0.3",
