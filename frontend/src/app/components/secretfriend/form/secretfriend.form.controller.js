@@ -1,13 +1,14 @@
 import CrudController from '../../../common/crud.controller';
 import states from '../../../common/states';
 
-class PersonFormController extends CrudController {
-  constructor($scope, $state, ngToast, peopleService, $rootScope) {
+class SecretFriendFormController extends CrudController {
+  constructor($scope, $state, ngToast, peopleService, secretFriendService, $rootScope) {
     super(ngToast, $scope, $rootScope);
     this.scope = $scope;
     this.toast = ngToast;
     this.state = $state;
-    this.service = peopleService;
+    this.peopleService = peopleService;
+    this.service = secretFriendService;
     this.scope.person = { name: $state.params.name, email: $state.params.email, id: $state.params.id };
   }
 
@@ -15,13 +16,9 @@ class PersonFormController extends CrudController {
     this.persist(form, this.service.save(this.scope.person), 'Pessoa cadastrada com sucesso!');
   }
 
-  update(form) {
-    this.persist(form, this.service.update(this.scope.person), 'Pessoa alterada com sucesso!');
-  }
-
   cancel() {
-    this.state.go(states.PEOPLE_LIST);
+    this.state.go(states.SECRETFRIEND_LIST);
   }
 }
 
-export default PersonFormController;
+export default SecretFriendFormController;

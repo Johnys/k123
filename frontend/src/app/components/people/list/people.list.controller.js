@@ -1,5 +1,6 @@
 /* globals window */
 import BaseController from '../../../common/base.controller';
+import states from '../../../common/states';
 
 class PeopleListController extends BaseController {
   constructor($scope, $state, ngToast, peopleService, $rootScope) {
@@ -11,7 +12,7 @@ class PeopleListController extends BaseController {
   }
 
   new() {
-    this.state.go('personform');
+    this.state.go(states.PERSON_FORM);
   }
 
   find() {
@@ -28,7 +29,7 @@ class PeopleListController extends BaseController {
   }
 
   edit(person) {
-    this.state.go('personform', person);
+    this.state.go(states.PERSON_FORM, person);
   }
 
   remove(person) {

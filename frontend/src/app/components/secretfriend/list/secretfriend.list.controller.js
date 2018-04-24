@@ -1,5 +1,5 @@
-/* globals window */
 import BaseController from '../../../common/base.controller';
+import states from '../../../common/states';
 
 class SecretFriendListController extends BaseController {
   constructor($scope, $rootScope, $state, ngToast, secretFriendService) {
@@ -12,7 +12,7 @@ class SecretFriendListController extends BaseController {
   }
 
   new() {
-    this.state.go('secretFriendform');
+    this.state.go(states.SECRETFRIEND_FORM);
   }
 
   find() {
