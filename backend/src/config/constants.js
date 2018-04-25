@@ -38,7 +38,7 @@ const defaultConfig = {
     host: 'smtp.gmail.com',
     from: 'jjohnys.teste@gmail.com',
     user: 'jjohnys.teste@gmail.com',
-    password: 'password',
+    password: 'paamasdfnafu123**sda1$$',
   },
 };
 
