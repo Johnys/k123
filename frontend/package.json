@@ -8,7 +8,8 @@
     "test": "mocha ./tests -name '*.spec.js' --recursive --timeout 120000 --require babel-register --exit ",
     "start": "npm run build && node server.js",
     "coverage": "nyc --report-dir coverage npm test",
-    "coverage-build": "nyc --report-dir dist/coverage npm test"
+    "coverage-build": "nyc --report-dir dist/coverage npm test",
+    "lint": "eslint src/**/*.js"
   },
   "nyc": {
     "reporter": [
