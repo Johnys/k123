@@ -36,9 +36,9 @@ const defaultConfig = {
   },
   mailer: {
     host: 'smtp.gmail.com',
-    from: 'jjohnys@gmail.com',
-    user: 'jjohnys@gmail.com',
-    password: 'jjrwvftwlvbgihhk',
+    from: 'jjohnys.teste@gmail.com',
+    user: 'jjohnys.teste@gmail.com',
+    password: 'password',
   },
 };
 
