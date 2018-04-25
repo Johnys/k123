@@ -66,4 +66,4 @@ const environmentConfigs = {
 };
 
 // Recursively merge configurations
-export default merge(defaultConfig, environmentConfigs[process.env.NODE_ENV] || {});
+export default merge(defaultConfig, environmentConfigs[defaultConfig.env] || {});
