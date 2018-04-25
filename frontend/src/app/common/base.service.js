@@ -19,7 +19,6 @@ class BaseService {
   }
 
   getURI(param = null) {
-    console.log(__CONFIG);
     param = param ? `/${param}` : '';
     return `${__CONFIG.api}${this.uri}${param}`;
   }

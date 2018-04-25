@@ -49,10 +49,10 @@ class PeopleListController extends BaseController {
   }
 
   remove(person) {
-    if (window.confirm(`Deseja excluir a pessoa: ${person.name}`)) {
+    if (window.confirm(`Deseja excluir o participante: ${person.name}`)) {
       this.progress(true);
       let promise = this.service.remove(person);
-      promise = this.processPromise(promise, 'Pessoa excluida com sucesso!');
+      promise = this.processPromise(promise, 'Participante excluida com sucesso!');
       promise.then((result) => {
         if (!result.error) {
           this.find();
