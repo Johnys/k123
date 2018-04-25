@@ -1,5 +1,7 @@
 # Projeto Amigo Secreto
 
+Site de cadastro de sorteios de amigos secretos.
+
 ## Getting Started
 
 ```powershell
