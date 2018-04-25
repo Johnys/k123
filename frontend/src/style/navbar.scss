@@ -1,11 +1,22 @@
 @import '../../node_modules/bootstrap/scss/functions.scss';
 @import '../../node_modules/bootstrap/scss/variables.scss';
+nav.navbar{
+  border: solid 1px #e7e7e7;
+}
 nav.nav.nav-pills{
   float: left;
   width: 190px;
   height: 100%;
   background-color: #f8f9fa;
+  border: solid 1px #e7e7e7;
+  a{
+    color: #337ab7;
+  }
   a:hover{
     background-color: rgb(233, 236, 239);
+  }
+  .nav-link.active{
+    background-color: #eeeeee !important;
+    color: #337ab7;
   }
 }

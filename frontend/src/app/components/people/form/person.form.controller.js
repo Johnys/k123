@@ -12,11 +12,11 @@ class PersonFormController extends CrudController {
   }
 
   save(form) {
-    this.persist(form, this.service.save(this.scope.person), 'Pessoa cadastrada com sucesso!');
+    this.persist(form, this.service.save(this.scope.person), 'Participante cadastrado com sucesso!');
   }
 
   update(form) {
-    this.persist(form, this.service.update(this.scope.person), 'Pessoa alterada com sucesso!');
+    this.persist(form, this.service.update(this.scope.person), 'Participante alterado com sucesso!');
   }
 
   cancel() {

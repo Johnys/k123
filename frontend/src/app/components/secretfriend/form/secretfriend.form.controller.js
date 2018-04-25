@@ -13,6 +13,7 @@ class SecretFriendFormController extends CrudController {
     this.scope.secretfriend = { name: '', revelation_date: '', people: [] };
     this.scope.selectedPeople = {};
     this.scope.selectAll = false;
+    this.scope.people = [];
     this.findPeople();
   }
 
