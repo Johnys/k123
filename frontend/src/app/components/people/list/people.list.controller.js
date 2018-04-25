@@ -48,6 +48,7 @@ class PeopleListController extends BaseController {
     this.state.go(states.PERSON_FORM, person);
   }
 
+  /* eslint-disable no-alert */
   remove(person) {
     if (window.confirm(`Deseja excluir o participante: ${person.name}`)) {
       this.progress(true);
